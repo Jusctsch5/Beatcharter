@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6c302624-831b-459c-9d87-f7eb69719858" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/beatchart/Beatchart.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/beatchart/BeatchartDecoder.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="15" column="44" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="44" />
+              <folding>
+                <element signature="e#0#52#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/code/tests/test_beatchartDecoder.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="393">
+              <caret line="28" column="60" lean-forward="true" selection-start-line="28" selection-start-column="60" selection-end-line="28" selection-end-column="60" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/Beatcharter.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="16" column="21" selection-start-line="16" selection-end-line="17" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/builders/StepBuilder.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/encoders/Encoder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/beatchart/BeatchartGenerator.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/beatchart/SubtatumCount.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/beatchart/SubtatumMap.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/beatchart/AubioWrapper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="54" selection-start-line="54" selection-end-line="54" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>BeatchartDecoder</find>
+      <find>Minim</find>
+      <find>.sample</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Aubio</replace>
+      <replace>sample_rate</replace>
+    </replaceStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/code/encoders/Encoders.java" />
+        <option value="$PROJECT_DIR$/code/encoders/EncoderCommon.py" />
+        <option value="$PROJECT_DIR$/code/beatchart.py" />
+        <option value="$PROJECT_DIR$/code/beatchart/Beatchart.py" />
+        <option value="$PROJECT_DIR$/code/beatchart/BeatchartDecoder.java" />
+        <option value="$PROJECT_DIR$/code/beatchart/MinimWrapper.py" />
+        <option value="$PROJECT_DIR$/code/beatchart/MinimWrapperAbstract.java" />
+        <option value="$PROJECT_DIR$/code/Beatcharter.py" />
+        <option value="$PROJECT_DIR$/code/beatchart/test_beatchartDecoder.py" />
+        <option value="$PROJECT_DIR$/code/beatchart/BeatchartDecoder.py" />
+        <option value="$PROJECT_DIR$/code/beatchart/AubioWrapper.py" />
+        <option value="$PROJECT_DIR$/code/tests/test_beatchartDecoder.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="3815" />
+    <option name="y" value="196" />
+    <option name="width" value="672" />
+    <option name="height" value="891" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Beatcharter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Beatcharter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Beatcharter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Beatcharter" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Beatcharter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Beatcharter" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Beatcharter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Beatcharter" type="462c0819:PsiDirectoryNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/code/tests" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Projects\Beatcharter\code" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Projects\Beatcharter\code" />
+      <recent name="E:\Projects\Beatcharter" />
+      <recent name="E:\Projects\Beatcharter\uml" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python tests.Unittests for test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm">
+    <configuration name="test_beatchartDecoder" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Beatcharter" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/code/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/tests/test_beatchartDecoder.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_beatchartDecoder.TestBeatchartDecoder" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Beatcharter" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/code/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_beatchartDecoder.TestBeatchartDecoder&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Beatcharter" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/code/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Unittests for test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm" />
+        <item itemvalue="Python tests.Unittests for test_beatchartDecoder.TestBeatchartDecoder" />
+        <item itemvalue="Python.test_beatchartDecoder" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6c302624-831b-459c-9d87-f7eb69719858" name="Default Changelist" comment="" />
+      <created>1586726852422</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586726852422</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="Unittests_for_test_beatchartDecoder_TestBeatchartDecoder_test_find_bpm - 2020.05.19 at 16h 26m 39s.xml">
+      <configuration name="Unittests for test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_beatchartDecoder_TestBeatchartDecoder_test_find_bpm - 2020.05.19 at 16h 27m 30s.xml">
+      <configuration name="Unittests for test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_beatchartDecoder_TestBeatchartDecoder_test_find_bpm - 2020.05.19 at 16h 28m 40s.xml">
+      <configuration name="Unittests for test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_beatchartDecoder_TestBeatchartDecoder_test_find_bpm - 2020.05.19 at 16h 32m 04s.xml">
+      <configuration name="Unittests for test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_beatchartDecoder_TestBeatchartDecoder_test_find_bpm - 2020.05.19 at 16h 33m 41s.xml">
+      <configuration name="Unittests for test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_beatchartDecoder_TestBeatchartDecoder_test_find_bpm - 2020.05.19 at 16h 35m 22s.xml">
+      <configuration name="Unittests for test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_beatchartDecoder_TestBeatchartDecoder_test_find_bpm - 2020.05.19 at 16h 35m 50s.xml">
+      <configuration name="Unittests for test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_beatchartDecoder_TestBeatchartDecoder_test_find_bpm - 2020.05.19 at 16h 37m 45s.xml">
+      <configuration name="Unittests for test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_beatchartDecoder_TestBeatchartDecoder_test_find_bpm - 2020.05.19 at 16h 38m 06s.xml">
+      <configuration name="Unittests for test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_beatchartDecoder_TestBeatchartDecoder_test_find_bpm - 2020.05.19 at 16h 38m 31s.xml">
+      <configuration name="Unittests for test_beatchartDecoder.TestBeatchartDecoder.test_find_bpm" configurationId="tests" />
+    </history-entry>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="3815" y="196" width="672" height="891" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.70189273" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32955405" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.96042216" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32955405" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/uml/beatcharter.uml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/encoders/EncoderCommon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/beatchart/MinimWrapperAbstract.java" />
+    <entry file="file://$PROJECT_DIR$/code/encoders/SMEncoder.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/beatchart/BeatchartLogger.java" />
+    <entry file="file://$PROJECT_DIR$/code/beatchart/test_beatchartDecoder.py" />
+    <entry file="file://$PROJECT_DIR$/code/beatchart/Beatchart.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/beatchart/BeatchartDecoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="15" column="44" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Beatcharter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="16" column="21" selection-start-line="16" selection-end-line="17" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/builders/StepBuilder.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/encoders/Encoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/beatchart/BeatchartGenerator.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/beatchart/SubtatumCount.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/beatchart/SubtatumMap.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/beatchart/AubioWrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/tests/test_beatchartDecoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="28" column="60" lean-forward="true" selection-start-line="28" selection-start-column="60" selection-end-line="28" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
