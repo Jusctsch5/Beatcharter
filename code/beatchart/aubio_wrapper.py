@@ -2,17 +2,16 @@ from aubio import tempo, source
 import sys
 from pydub import AudioSegment
 from numpy import median, diff
-
+from tabulate import tabulate
 
 class AubioWrapper():
-    """
-    /**
-     * FindBPM - finds bpm of song
-     * @return float detected bpm
-     */
-    """
-    def calculate_bpm(self, filename):
 
+    def __init__(self):
+        self.window_size = 512
+        self.hop_size = self.window_size//2
+        self.sample_rate_hz = 48000
+
+    def __convert_to_wav(self, filename):
         short_name = filename.split('/')[-1]
         extension = short_name.split('.')[-1]
 
@@ -25,27 +24,33 @@ class AubioWrapper():
             print("Converted %s to %s (%s)", filename, resulting_wav)
             filename = resulting_wav
 
-        bpm = self.get_bpm_simple(filename, sample_rate=44100)
-        print(bpm)
+        return filename
 
-        bpm = self.get_bpm_iterative(filename, sample_rate=44100)
+    """
+     FindBPM - finds bpm of song
+     @return float detected bpm
+    """
+    def calculate_bpm(self, filename):
+
+        filename = self.__convert_to_wav(filename)
+        bpm = self.get_bpm_simple(filename)
+        print("Simplebpm)
+
+        bpm = self.get_bpm_iterative(filename)
         print(bpm)
 
         return bpm
 
-    def get_bpm_simple(self, path, **kwargs):
-        window_size = 512
-        hop_size = int(window_size / 2)
-        sample_rate = 48000
+    def get_bpm_simple(self, filename):
+        window_size = self.window_size
+        hop_size = self.hop_size
+        sample_rate = self.sample_rate_hz
 
-        for key, value in kwargs.items():
-            if key == 'sample_rate':
-                sample_rate = value
-
-        s = source(path, sample_rate, hop_size)
+        s = source(filename, sample_rate, hop_size)
 
         sample_rate = s.samplerate
         o = tempo("default", window_size, hop_size, sample_rate)
+        
         # tempo detection delay, in samples
         # default to 4 blocks delay to catch up with
         delay = 4. * hop_size
@@ -67,27 +72,18 @@ class AubioWrapper():
         return beats[0]
 
 
-    def get_bpm_iterative(self, path, **kwargs):
+    def get_bpm_iterative(self, filename):
         """ Calculate the beats per minute (bpm) of a given file.
-            path: path to the file
+            filename: filename to the file
             param: dictionary of parameters
         """
+        window_size = self.window_size
+        hop_size = self.hop_size
+        sample_rate = self.sample_rate_hz
 
-        # default:
-        sample_rate, win_s, hop_s = 44100, 1024, 512
-
-        for key, value in kwargs.items():
-            if key == 'sample_rate':
-                sample_rate = value
-
-#         if 'win_s' in params:
-#             win_s = params.win_s
-#         if 'hop_s' in params:
-#             hop_s = params.hop_s
-
-        s = source(path, sample_rate, hop_s)
+        s = source(filename, sample_rate, hop_size)
         sample_rate = s.samplerate
-        o = tempo("specdiff", win_s, hop_s, sample_rate)
+        o = tempo("specdiff", window_size, hop_size, sample_rate)
         # List of beats, in samples
         beats = []
         # Total number of frames read
@@ -102,18 +98,18 @@ class AubioWrapper():
                 # if o.get_confidence() > .2 and len(beats) > 2.:
                 #    break
             total_frames += read
-            if read < hop_s:
+            if read < hop_size:
                 break
 
-        def beats_to_bpm(beats, path):
+        def beats_to_bpm(beats, filename):
             # if enough beats are found, convert to periods then to bpm
             if len(beats) > 1:
                 if len(beats) < 4:
-                    print("few beats found in {:s}".format(path))
+                    print("few beats found in {:s}".format(filename))
                 bpms = 60. / diff(beats)
                 return median(bpms)
             else:
-                print("not enough beats found in {:s}".format(path))
+                print("not enough beats found in {:s}".format(filename))
                 return 0
 
-        return beats_to_bpm(beats, path)
+        return beats_to_bpm(beats, filename)
