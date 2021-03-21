@@ -34,7 +34,7 @@ class AubioWrapper():
         return bpm
 
     def get_bpm_simple(self, path, **kwargs):
-        window_size = 512;
+        window_size = 512
         hop_size = int(window_size / 2)
         sample_rate = 48000
 

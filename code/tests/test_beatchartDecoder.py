@@ -2,7 +2,7 @@ from unittest import TestCase
 import os
 
 
-from code.beatchart.AubioWrapper import AubioWrapper
+from beatchart.aubio_wrapper import AubioWrapper
 
 
 class TestBeatchartDecoder(TestCase):

@@ -1,6 +1,5 @@
-from code.beatchart.AubioWrapper import AubioWrapper
-from code.beatchart.Beatchart import Beatchart
-
+from beatchart.aubio_wrapper import AubioWrapper
+from beatchart.beatchart import Beatchart
 
 class BeatchartDecoder:
 
@@ -9,13 +8,13 @@ class BeatchartDecoder:
     """
 
     def __init__(self):
-        self.wrapper = AubioWrapper();
+        self.wrapper = AubioWrapper()
 
     def decode_song(self, song_file, bpm):
         if bpm == 0:
             bpm = self.wrapper.calculate_bpm(song_file)
 
-        return Beatchart(song_file, bpm);
+        return Beatchart(song_file, bpm)
 
     """
      * Regarding methods of finding BPM
@@ -43,4 +42,4 @@ class BeatchartDecoder:
      */
     """
     def calculate_bpm(self, song_file):
-        return self.wrapper.find_bpm(song_file);
+        return self.wrapper.find_bpm(song_file)
