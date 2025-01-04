@@ -1,0 +1,44 @@
+@startuml
+
+package "Beatcharter" {
+  [Parser]
+
+  package "BeatDecoder" {
+    [Initial]
+    [Decode Beats]
+    [Decode Audio]
+    note top of [Initial] : \
+    Takes the incoming audio file\n\
+and creates a Beatchart object that contains \n\
+audio information to be used by the StepBuilder or \n\
+other 'plugin'
+  }
+
+  package "StepBuilder" {
+    note top of [Step Initial] : \
+    From the normalized SongObject, \n\
+fits and generates steps based on difficulty \n\
+and provided user parameters'
+    [Step Initial]
+    [Step Fitting]
+    [SM Encoding]
+  }
+  cloud {
+    [MinimWrapper]
+  }
+}
+
+[Audio File] -down-> [Parser]
+[Parser] -down-> [Initial]
+[Initial] -right-> [Decode Beats]
+[Decode Beats] -right-> [Decode Audio]
+
+[Decode Beats] <-up-> [MinimWrapper] : beat analysis
+[Decode Audio] <-up-> [MinimWrapper] : audio analysis
+[Decode Audio] -down-> [Step Initial]
+[Step Initial] -right-> [Step Fitting]
+[Step Fitting] -right-> [SM Encoding]
+[MinimWrapper] <-up-> [Minim Library]
+[SM Encoding] --> [SMFile]
+
+@enduml
