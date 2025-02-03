@@ -2,3 +2,4 @@ pytest
 aubio
 numpy
 pydub
+librosa

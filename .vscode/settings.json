@@ -1,3 +1,23 @@
 {
-    "python.pythonPath": "c:\\Users\\schum\\source\\repos\\Beatcharter\\venv\\Scripts\\python.exe"
+    "python.pythonPath": "c:\\Users\\schum\\source\\repos\\Beatcharter\\venv\\Scripts\\python.exe",
+    "python.testing.pytestEnabled": true,
+    "python.analysis.extraPaths": [
+        ".\\venv\\Lib\\site-packages"
+    ],
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": [
+                    "meta.import",
+                    "entity.name.namespace",
+                    "support.type.python",
+                    "meta.import.from.python",
+                    "meta.import.import.python"
+                ],
+                "settings": {
+                    "foreground": "#cc9cc8"
+                }
+            }
+        ]
+    }
 }
