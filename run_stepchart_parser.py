@@ -2,6 +2,7 @@ import argparse
 import logging
 from pathlib import Path
 from stepchart_utils.chart_parser import Chart, ChartParser
+from stepchart_utils.sm_file import ParseError
 
 logging.basicConfig(level=logging.INFO, format='%(filename)s:%(lineno)d - %(message)s')
 logger = logging.getLogger(__name__)
@@ -15,9 +16,13 @@ def process_sm_file(sm_file: Path) -> Chart:
         result.validate()
         logger.debug(f"Successfully parsed: {sm_file.relative_to(sm_file.parent.parent)}")
         return result
-    except Exception as e:
+    except ParseError as e:
         logger.error(f"Error processing {sm_file}: {str(e)}")
         return None
+    except Exception as e:
+        logger.exception(f"Error processing {sm_file}: {str(e)}")
+        return None
+    
 
 def find_sm_files(directory: Path) -> list[Path]:
     """Recursively find all .sm files in the given directory"""
@@ -48,7 +53,6 @@ def main():
     else:
         sm_files = find_sm_files(path)
         logger.info(f"Found {len(sm_files)} SM files to process")
-        
 
         results = []
         errors = []
@@ -64,6 +68,8 @@ def main():
             logger.error("Errors encountered during processing:")
             for error in errors:
                 logger.error(error)
+
+        logger.info(f"Found {len(results)} of {len(sm_files)} valid SM files")
 
     # Print results
     if logger.getEffectiveLevel() == logging.DEBUG:

@@ -13,7 +13,8 @@ logger.setLevel(logging.INFO)
 class Options:
     width: int
     height: int
-    use_static_fade: bool = True
+    use_static_fade: bool = True,
+    fade_duration: float = .5,
     duration: int = 15
     align_to_audio: bool = True,
     use_chart_sample_time: bool = True
@@ -67,12 +68,12 @@ def create_dynamic_banner(
             '-loop', '1',
             '-framerate', '30',
             '-i', '{input_image}',     # Input static image
-            '-ss', str(start_time),  # Start time in seconds for video
+            '-ss', '{start_time}',  # Start time in seconds for video
             '-i', '{video_path}',      # Input video
             '-filter_complex',
             '[0:v]scale={width}:{height}:flags=lanczos,fps=30[v0];'
             '[1:v]scale={width}:{height}:flags=lanczos,fps=30[v1];'
-            '[v0][v1]xfade=transition=fade:duration=1:offset=1',
+            '[v0][v1]xfade=transition=fade:duration={fade_duration}:offset=1',
             '-c:v', 'libx264',
             '-preset', 'slow',
             '-crf', '18',
@@ -85,9 +86,11 @@ def create_dynamic_banner(
         # Create banner video (typical ratio 418x164)
         banner_cmd = [arg.format(
             input_image=str(banner_path),
+            start_time=str(start_time + options.fade_duration),
             video_path=str(video_path),
             width=options.width,
             height=options.height,
+            fade_duration=options.fade_duration,
             output=f"{str(banner_output)}.temp"
         ) for arg in ffmpeg_template]
 
@@ -199,12 +202,12 @@ def create_dynamic_jacket(
             '-loop', '1',
             '-framerate', '30',
             '-i', '{input_image}',     # Input static image
-            '-ss', str(start_time),  # Start time in seconds for video
+            '-ss', '{start_time}',  # Start time in seconds for video
             '-i', '{video_path}',      # Input video
             '-filter_complex',
             '[0:v]scale={width}:{height}:flags=lanczos,fps=30[v0];'
             '[1:v]scale={width}:{height}:flags=lanczos,fps=30[v1];'
-            '[v0][v1]xfade=transition=fade:duration=1:offset=1',
+            '[v0][v1]xfade=transition=fade:duration={fade_duration}:offset=1',
             '-c:v', 'libx264',
             '-preset', 'slow',
             '-crf', '18',
@@ -216,9 +219,11 @@ def create_dynamic_jacket(
         ]
         jacket_cmd = [arg.format(
             input_image=str(jacket_path),
+            start_time=str(start_time + options.fade_duration),
             video_path=str(video_path),
             width=options.width,
             height=options.height,
+            fade_duration=options.fade_duration,
             output=f"{str(jacket_output)}.temp"
         ) for arg in ffmpeg_template]
 

@@ -21,6 +21,7 @@ class Chart:
         if self.audio_file and not self.audio_file.exists():
             raise FileNotFoundError(f"Audio file {self.audio_file} does not exist")
 
+
 class ChartParser:
     def __init__(self):
         pass
@@ -121,7 +122,16 @@ class ChartParser:
         # Parse other metadata
         sm_file.selectable = self._extract_value(content, "SELECTABLE")
         sm_file.list_sort = self._extract_value(content, "LISTSORT")
-        sm_file.bpms = self._extract_value(content, "BPMS")
+
+        # Convert BPMS to list of tuples
+        # Example #BPMS:0.000=160.002,10.000=180.002;
+        # Would be converted to [(0.0, 160.002), (10.0, 180.002)]
+        bpms = self._extract_value(content, "BPMS")
+        if bpms:
+            sm_file.bpms = [(float(bpm[0]), float(bpm[1])) for bpm in [bpm.split('=') for bpm in bpms.split(',')]]
+        else:
+            sm_file.bpms = []
+
         sm_file.stops = self._extract_value(content, "STOPS")
         bg_changes = self._extract_value(content, "BGCHANGES")
         sm_file.bg_changes = self.parse_bgchange(sm_file, bg_changes)
