@@ -55,7 +55,7 @@ class SMFile:
     bg_changes_update_rate: float = 1.0
     bg_changes_crossfade: bool = False
     bg_changes_stretchrewind: bool = False
-    bg_changes_stretchnoloop: bool = True
+    bg_changes_stretchnoloop: bool = False
     bg_changes_effect: str = ""
     bg_changes_file2: str = ""
     bg_changes_transition: str = ""
@@ -136,3 +136,10 @@ class SMFile:
                 offset_diff = abs(self.bg_changes_beat - calculated_bg_changes_beat)
                 if offset_diff >= 1.0:
                     raise OptionWarning("bg_changes", f"Offset is not zero ({self.offset}) but BGChanges beat is not equal to calculated BGChanges beat. Likely may see offset in audio/video. Calculated BGChanges beat: {calculated_bg_changes_beat}. Offset difference: {offset_diff}")
+
+        if self.bg_changes_beat != 0:
+            if self.bg_changes_file == "":
+                raise OptionWarning("bg_changes", "BGChanges beat is present but BGChanges file is not specified")
+            
+            if self.bg_changes_stretchnoloop is False and "StretchNoLoop" not in self.bg_changes_effect:
+                raise OptionWarning("bg_changes", "BGChanges beat is present but BGChanges stretchnoloop is not set to true. Video will loop at end if unspecified")

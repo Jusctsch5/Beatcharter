@@ -19,7 +19,7 @@ def process_sm_file(sm_file: Path, output_dir: Path) -> None:
         create_dynamic_assets(parsed_chart, output_dir)
         logger.info(f"Successfully created assets for: {sm_file.parent.name}")
     except Exception as e:
-        logger.error(f"Error processing {sm_file}: {str(e)}")
+        logger.exception(f"Error processing {sm_file}: {str(e)}")
 
 def find_sm_files(directory: Path) -> list[Path]:
     """Recursively find all .sm files in the given directory"""

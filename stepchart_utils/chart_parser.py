@@ -30,8 +30,36 @@ class ChartParser:
         """
         Parse a BGCHANGES line into its component parts with default values.
         
-        Format: Beat=File=UpdateRate=CrossFade=StretchRewind=StretchNoLoop=Effect=File2=Transition=Color1=Color2
-        Example: -0.506=sengoku3.mp4=1.000=1=0=0=StretchNoLoop==CrossFade==
+        BGCHANGE format:
+        beat=file_or_folder=update_rate=crossfade=stretchrewind=stretchnoloop=Effect=File2=Transition=Color1=Color2;
+
+        beat: The beat this BGCHANGE occurs on. Can be negative to start before the first beat.
+        file_or_folder: The relative path to the file to use for the BGCHANGE. Lua files are allowed. If a folder is given, it looks for "default.lua".
+        update_rate: The update rate of the BGCHANGE.
+        crossfade: set to 1 if using a crossfade. Overriden by Effect.
+        stretchrewind: set to 1 if using stretchrewind. Overriden by Effect.
+        stretchnoloop: set to 1 if using stretchnoloop. Overriden by Effect.
+        Effect: What BackgroundEffect to use.
+        File2: The second file to load for this BGCHANGE.
+        Transition: How the background transitions to this.
+        Color1/Color2: Formatted as red^green^blue^alpha, with the values being from 1 to 0, Passed to the BackgroundEffect with the LuaThreadVaraible "Color1"/"Color2" in web hexadecimal format as a string. Alpha is optional.
+        
+        Examples: 
+                Beat   =File                  =UpdateRate   =CrossFade =StretchRewind =StretchNoLoop   =Effect        =File2 =Transition =Color1 =Color2
+                -0.506 =sengoku3.mp4          =1.000        =1         =0             =0               =StretchNoLoop =      =CrossFade  =       =
+
+
+            This chart has two oddities:
+            1) specifies both CrossFade with a 1 with the explicit CrossFade argument as well as specifying a CrossFade transition.
+            2) specifies 0 for the explicit StretchNoLoop argument, but yet specifies a StretchNoLoop effect.
+
+            Would be more simply defined as the following:
+                Beat   =File                  =UpdateRate   =CrossFade =StretchRewind =StretchNoLoop   =Effect        =File2 =Transition =Color1 =Color2
+                -0.506 =sengoku3.mp4          =1.000        =1         =0             =1               =              =      =           =       =
+
+                Or, without whitespace:
+                -0.506=sengoku3.mp4=1.000=1=0=1=====
+                
         """
         # Default values
         defaults = {

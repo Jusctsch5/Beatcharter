@@ -14,7 +14,7 @@ class Options:
     width: int
     height: int
     use_static_fade: bool = True,
-    fade_duration: float = .5,
+    fade_duration: float = 0.5,
     duration: int = 15
     align_to_audio: bool = True,
     use_chart_sample_time: bool = True
@@ -59,6 +59,9 @@ def create_dynamic_banner(
             duration = sm_file.sample_length
     else:
         start_time = 0
+
+    print(start_time)
+    print(options.fade_duration)
 
     banner_cmd = None
     if options.use_static_fade:
@@ -310,7 +313,8 @@ def create_dynamic_assets(
             Options(
                 use_static_fade=use_static_fade,
                 width=418,
-                height=164
+                height=164,
+                fade_duration=0.5
             ),
             chart, 
             output_dir
@@ -320,7 +324,8 @@ def create_dynamic_assets(
             Options(
                 use_static_fade=use_static_fade,
                 width=256,
-                height=256
+                height=256,
+                fade_duration=0.5
             ),
             chart, 
             output_dir
