@@ -2,6 +2,7 @@ import os
 import shutil
 from pathlib import Path
 
+
 class SMEncoder:
     HEADER = """#TITLE:$TITLE;
 #SUBTITLE:;
@@ -46,7 +47,11 @@ $NOTES
     def add_notes(sm_file, difficulty: str, notes: str) -> None:
         """Add notes to the SM file for a specific difficulty."""
         try:
-            sm_file.write(SMEncoder.CHART_HEADER.replace("$DIFFICULTY", difficulty).replace("$NOTES", notes))
+            sm_file.write(
+                SMEncoder.CHART_HEADER.replace("$DIFFICULTY", difficulty).replace(
+                    "$NOTES", notes
+                )
+            )
         except Exception:
             pass
 
@@ -82,30 +87,31 @@ $NOTES
         filename = song_file.name
         song_name = Path(filename).stem
         short_name = song_name[:32] if len(song_name) > 32 else song_name
-        
+
         # Create directory
         directory = Path(output_dir) / filename
         directory.mkdir(parents=True, exist_ok=True)
-        
+
         sm_file = directory / f"{filename}.sm"
 
         try:
             # Remove old file if it exists
             if sm_file.exists():
                 sm_file.unlink()
-            
+
             # Copy song file to new directory
             shutil.copy2(song_file, directory / filename)
-            
+
             # Create and write to new SM file
-            with open(sm_file, 'w') as writer:
-                header_content = (SMEncoder.HEADER
-                    .replace("$TITLE", short_name)
+            with open(sm_file, "w") as writer:
+                header_content = (
+                    SMEncoder.HEADER.replace("$TITLE", short_name)
                     .replace("$MUSICFILE", filename)
                     .replace("$STARTTIME", str(start_time))
-                    .replace("$BPM", str(bpm)))
+                    .replace("$BPM", str(bpm))
+                )
                 writer.write(header_content)
                 return writer
-                
+
         except Exception:
-            return None 
+            return None

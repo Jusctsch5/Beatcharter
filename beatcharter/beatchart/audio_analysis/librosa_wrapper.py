@@ -5,7 +5,10 @@ from pathlib import Path
 from numpy import float64
 from numpy.typing import NDArray
 
-from beatcharter.beatchart.audio_analysis.audio_analysis_wrapper import AudioAnalysisWrapper
+from beatcharter.beatchart.audio_analysis.audio_analysis_wrapper import (
+    AudioAnalysisWrapper,
+)
+
 
 class LibrosaWrapper(AudioAnalysisWrapper):
     def __init__(self):
@@ -15,7 +18,7 @@ class LibrosaWrapper(AudioAnalysisWrapper):
         y, sr = load(path)
         bpm = tempo(y=y, sr=sr)
         return bpm
-    
+
     def get_beats(self, path: Path):
         y, sr = load(path)
         tempo, _ = beat_track(y=y, sr=sr)

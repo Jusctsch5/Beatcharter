@@ -4,7 +4,7 @@ from typing import List
 import logging
 
 from stepchart_utils.ssc_file import SSCFile
-from stepchart_utils.step_chart_file import StepChartFile  
+from stepchart_utils.step_chart_file import StepChartFile
 
 from .sm_file import SMFile
 
@@ -44,7 +44,7 @@ class ChartParser:
         chart = Chart(sm_file, video_file, audio_file)
 
         return chart
-    
+
     def _parse_ssc_file(self, filepath: Path) -> Chart:
         """Parse an SSC file and return an SSCFile object"""
         ssc_file, audio_file, video_file = SSCFile().parse(filepath)
@@ -55,8 +55,8 @@ class ChartParser:
     def is_chart_file(self, filepath: Path) -> bool:
         """Check if a file is a chart file"""
         return filepath.suffix in [".sm", ".ssc"]
-    
-    def get_chart_files_from_directory(self, directory: Path) -> List[Path] :
+
+    def get_chart_files_from_directory(self, directory: Path) -> List[Path]:
         """Return each chart file in a directory, recursively"""
         chart_files = []
         for file in directory.iterdir():
@@ -66,4 +66,3 @@ class ChartParser:
                 chart_files.append(file)
 
         return chart_files
-    

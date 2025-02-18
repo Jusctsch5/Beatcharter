@@ -1,6 +1,7 @@
 from pathlib import Path
 import re
 
+
 class ParseError(Exception):
     pass
 
@@ -10,10 +11,12 @@ class FileMissing(ParseError):
         self.file_path = file_path
         super().__init__(f"File {file_path} does not exist")
 
+
 class FileUnspecified(ParseError):
     def __init__(self, option: str):
         self.option = option
         super().__init__(f"File is not specified for option: #{option.upper()}:")
+
 
 class OptionWarning(ParseError):
     def __init__(self, option: str, message: str):
@@ -28,14 +31,21 @@ def extract_value(content: str, key: str) -> str:
     match = re.search(pattern, content, re.DOTALL)
     return match.group(1).strip() if match else ""
 
+
 def find_video_file(chart_dir: Path) -> Path:
-    video_files = list(chart_dir.glob('*.avi')) + list(chart_dir.glob('*.mp4'))
+    video_files = list(chart_dir.glob("*.avi")) + list(chart_dir.glob("*.mp4"))
     if video_files:
         return video_files[0]
     return None
 
+
 def find_audio_file(chart_dir: Path) -> Path:
-    audio_files = list(chart_dir.glob('*.flac')) + list(chart_dir.glob('*.mp3')) + list(chart_dir.glob('*.ogg')) + list(chart_dir.glob('*.wav'))
+    audio_files = (
+        list(chart_dir.glob("*.flac"))
+        + list(chart_dir.glob("*.mp3"))
+        + list(chart_dir.glob("*.ogg"))
+        + list(chart_dir.glob("*.wav"))
+    )
     if audio_files:
         return audio_files[0]
     return None
