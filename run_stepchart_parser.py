@@ -1,26 +1,28 @@
 import argparse
 import logging
 from pathlib import Path
+from typing import List
 from stepchart_utils.chart_parser import Chart, ChartParser
-from stepchart_utils.sm_file import ParseError
+from stepchart_utils.common_parser import ParseError
 
 logging.basicConfig(level=logging.INFO, format='%(filename)s:%(lineno)d - %(message)s')
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-def process_sm_file(sm_file: Path) -> Chart:
+chart_parser = ChartParser()
+
+def parse_chart_file(chart_file_path: Path) -> Chart:
     """Process a single SM file and return the parsed result"""
     try:
-        sm_parser = ChartParser()
-        result: Chart = sm_parser.parse_sm_file(sm_file)
+        result: Chart = chart_parser.parse_file(chart_file_path)
         result.validate()
-        logger.debug(f"Successfully parsed: {sm_file.relative_to(sm_file.parent.parent)}")
+        logger.debug(f"Successfully parsed: {chart_file_path.relative_to(chart_file_path.parent.parent)}")
         return result
     except ParseError as e:
-        logger.error(f"Error processing {sm_file}: {str(e)}")
+        logger.error(f"Error processing {chart_file_path}: {str(e)}")
         return None
     except Exception as e:
-        logger.exception(f"Error processing {sm_file}: {str(e)}")
+        logger.exception(f"Unexpected error processing {chart_file_path}: {str(e)}")
         return None
     
 
@@ -38,49 +40,49 @@ def main():
     if not path.exists():
         logger.error(f"Error: Path {path} does not exist")
         return
-
+    
+    results: List[Chart] = [] 
     # Handle single file
     if path.is_file():
-        if path.suffix.lower() != '.sm':
-            logger.error(f"Error: {path} is not an SM file")
+        if not chart_parser.is_chart_file(path):
+            logger.error(f"Error: {path} is not a chart file")
             return
         results = []
-        result = process_sm_file(path)
+        result = parse_chart_file(path)
         if result:
             results.append(result)
     
     # Handle directory
     else:
-        sm_files = find_sm_files(path)
-        logger.info(f"Found {len(sm_files)} SM files to process")
+        chart_files = chart_parser.get_chart_files_from_directory(path)
+        logger.info(f"Found {len(chart_files)} Chart files to process")
 
         results = []
         errors = []
-        for sm_file in sm_files:
+        for chart_file_path in chart_files:
             try:
-                result = process_sm_file(sm_file)
+                result = parse_chart_file(chart_file_path)
                 if result:
                     results.append(result)
             except Exception as e:
-                errors.append(f"Error processing {sm_file}: {str(e)}")
+                errors.append(f"Error processing {chart_file_path}: {str(e)}")
                 
         if errors:
             logger.error("Errors encountered during processing:")
             for error in errors:
                 logger.error(error)
 
-        logger.info(f"Found {len(results)} of {len(sm_files)} valid SM files")
+        logger.info(f"Found {len(results)} of {len(chart_files)} valid Chart files")
 
     # Print results
     if logger.getEffectiveLevel() == logging.DEBUG:
         for result in results:
             print("\n-------------------")
-            print(f"Chart: {result.sm_file.filepath}")
+            print(f"Chart: {result.chart_file_path.filepath}")
             for key, value in vars(result).items():
                 if key != 'filepath':  # Skip filepath since we already printed it
                     print(f"    {key}: {value}")    
 
-                
 
 if __name__ == "__main__":
     main()

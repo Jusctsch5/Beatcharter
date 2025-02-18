@@ -43,6 +43,11 @@ def create_dynamic_banner(
 
     if not banner_path or not banner_path.exists() and background_path and background_path.exists():
         banner_path = background_path
+
+    if banner_path is None:
+        logger.warning(f"No banner path found for {sm_file.filepath}")
+        return None
+    
     if banner_path.suffix == ".mp4":
         logger.warning(f"Banner path is already a video: {banner_path}")
         return banner_path
@@ -180,6 +185,10 @@ def create_dynamic_jacket(
 
     if not jacket_path or not jacket_path.exists() and background_path and background_path.exists():
         jacket_path = background_path
+
+    if jacket_path is None:
+        logger.warning(f"No jacket path found for {sm_file.filepath}")
+        return None
 
     if jacket_path.suffix == ".mp4":
         logger.warning(f"Jacket path is already a video: {jacket_path}")

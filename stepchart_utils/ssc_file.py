@@ -1,21 +1,22 @@
 """
-SMFile is a class that represents an SM file.
+SSCFile is a class that represents an SSC file.
+It is a subclass of SMFile, and adds options such as jacket.
 """
 from __future__ import annotations
-
 from dataclasses import dataclass, field
-from typing import List
-from pathlib import Path
 import logging
+from pathlib import Path
+from typing import List
 
 from stepchart_utils.common_parser import FileMissing, FileUnspecified, OptionWarning, extract_value, find_audio_file, find_video_file
-from stepchart_utils.step_chart_file import StepChartFile
+from stepchart_utils.sm_file import SMFile
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+
 @dataclass
-class SMFile(StepChartFile):
+class SSCFile:
     filepath: Path = None  # todo remove this and combine in Chart object, technically not SM
     title: str = ""
     subtitle: str = ""
@@ -51,89 +52,91 @@ class SMFile(StepChartFile):
     attacks: str = ""
     notes: List[str] = None
     unknown_options: dict[str, str] = field(default_factory=dict)
+    jacket: str = ""
 
     def __post_init__(self):
         if self.notes is None:
             self.notes = []
 
+    def parse(self, filepath: Path) -> tuple[SSCFile, Path, Path]:
+        """Parse an SSC file and return an SSCFile object"""
 
-    @staticmethod
-    def parse(filepath: Path) -> tuple[SMFile, Path, Path]:
-        """Parse an SM file and return an SMFile object"""
-        sm_file = SMFile()
-
+        ssc_file = SSCFile()
+        
         with open(filepath, 'r', encoding='utf-8') as f:
-            content = f.read()            
+            content = f.read()
 
         # Parse basic metadata
-        sm_file.filepath = filepath
-        sm_file.title = extract_value(content, "TITLE")
-        sm_file.subtitle = extract_value(content, "SUBTITLE")
-        sm_file.artist = extract_value(content, "ARTIST")
-        sm_file.genre = extract_value(content, "GENRE")
-        sm_file.credit = extract_value(content, "CREDIT")
-        sm_file.menu_color = extract_value(content, "MENUCOLOR")
-        sm_file.meter_type = extract_value(content, "METERTYPE")
-        sm_file.banner = extract_value(content, "BANNER")
-        sm_file.background = extract_value(content, "BACKGROUND")
-        sm_file.lyrics_path = extract_value(content, "LYRICSPATH")
-        sm_file.cd_title = extract_value(content, "CDTITLE")
-        sm_file.music = extract_value(content, "MUSIC")
+        ssc_file.filepath = filepath
+        ssc_file.title = extract_value(content, "TITLE")
+        ssc_file.subtitle = extract_value(content, "SUBTITLE")
+        ssc_file.artist = extract_value(content, "ARTIST")
+        ssc_file.genre = extract_value(content, "GENRE")
+        ssc_file.credit = extract_value(content, "CREDIT")
+        ssc_file.menu_color = extract_value(content, "MENUCOLOR")
+        ssc_file.meter_type = extract_value(content, "METERTYPE")
+        ssc_file.banner = extract_value(content, "BANNER")
+        ssc_file.background = extract_value(content, "BACKGROUND")
+        ssc_file.lyrics_path = extract_value(content, "LYRICSPATH")
+        ssc_file.cd_title = extract_value(content, "CDTITLE")
+        ssc_file.music = extract_value(content, "MUSIC")
+        ssc_file.jacket = extract_value(content, "JACKET")
         
         # Parse numeric values
         offset = extract_value(content, "OFFSET")
-        sm_file.offset = float(offset) if offset else 0.0
+        ssc_file.offset = float(offset) if offset else 0.0
         
         sample_start = extract_value(content, "SAMPLESTART")
-        sm_file.sample_start = float(sample_start) if sample_start else 0.0
+        ssc_file.sample_start = float(sample_start) if sample_start else 0.0
         
         sample_length = extract_value(content, "SAMPLELENGTH")
-        sm_file.sample_length = float(sample_length) if sample_length else 0.0
+        ssc_file.sample_length = float(sample_length) if sample_length else 0.0
         
         # Parse other metadata
-        sm_file.selectable = extract_value(content, "SELECTABLE")
-        sm_file.list_sort = extract_value(content, "LISTSORT")
+        ssc_file.selectable = extract_value(content, "SELECTABLE")
+        ssc_file.list_sort = extract_value(content, "LISTSORT")
 
-        # Convert BPMS to list of tuples
-        # Example #BPMS:0.000=160.002,10.000=180.002;
-        # Would be converted to [(0.0, 160.002), (10.0, 180.002)]
         bpms = extract_value(content, "BPMS")
         if bpms:
-            sm_file.bpms = [(float(bpm[0]), float(bpm[1])) for bpm in [bpm.split('=') for bpm in bpms.split(',')]]
+            ssc_file.bpms = [(float(bpm[0]), float(bpm[1])) for bpm in [bpm.split('=') for bpm in bpms.split(',')]]
         else:
-            sm_file.bpms = []
+            ssc_file.bpms = []
 
-        sm_file.stops = extract_value(content, "STOPS")
+        ssc_file.stops = extract_value(content, "STOPS")
         bg_changes = extract_value(content, "BGCHANGES")
-        sm_file.bg_changes = sm_file._parse_bgchange(bg_changes)
+        ssc_file.bg_changes = ssc_file._parse_bgchange(bg_changes)
 
-        sm_file.attacks = extract_value(content, "ATTACKS")
+        ssc_file.attacks = extract_value(content, "ATTACKS")
 
         # TODO: Implement notes parsing
 
-        if sm_file.bg_changes_file:
-            video_file = sm_file.filepath.parent / sm_file.bg_changes_file
+        if ssc_file.bg_changes_file:
+            video_file = ssc_file.filepath.parent / ssc_file.bg_changes_file
         else:
-            video_file = find_video_file(sm_file.filepath.parent)
-        if sm_file.music:
-            audio_file = sm_file.filepath.parent / sm_file.music
+            video_file = find_video_file(ssc_file.filepath.parent)
+        if ssc_file.music:
+            audio_file = ssc_file.filepath.parent / ssc_file.music
         else:
-            audio_file = find_audio_file(sm_file.filepath.parent)
+            audio_file = find_audio_file(ssc_file.filepath.parent)
 
-        # Now check for unknown options. Operate on the whole content string, look at each option #FOO and see if it's in the list of valid options. If it's not, add it to the unknown_options dict.
         for line in content.split('\n'):
             if line.startswith('#'):
                 option = line[1:].split(':')[0]
-                if option not in sm_file.get_valid_options():
-                    sm_file.unknown_options[option] = line # Technically should be every line until the next #FOO, but this is good enough to warn on.
+                if option not in ssc_file.get_valid_options():
+                    ssc_file.unknown_options[option] = line # Technically should be every line until the next #FOO, but this is good enough to warn on.
 
-        return sm_file, audio_file, video_file
-    
+        return ssc_file, audio_file, video_file
 
     def validate(self):
         chart_dir = self.filepath.parent
-        logger.debug(f"Validate SM file: {chart_dir}")
+        logger.debug(f"Validate SSC file: {chart_dir}")
 
+        # We want to have a jacket, banner, and background
+        if not self.jacket:
+            raise FileUnspecified("jacket")        
+        if self.jacket and not (chart_dir / self.jacket).exists():
+            raise FileMissing(f"Jacket file {self.jacket} does not exist")
+        
         if self.filepath is None:
             raise ValueError("Filepath is required")
         if not self.filepath.exists():
@@ -157,26 +160,6 @@ class SMFile(StepChartFile):
             raise FileMissing(f"Lyrics file {self.lyrics_path} does not exist")
         
         if self.offset != 0:
-        
-            # Let's calculate what the BGChanges beat should be
-            # This is based off of the offset and the BPMs.
-            # Lining up video, audio, and step chart. Assuming a case with no stepchart, where audio and video come from the same source, and you want to line them up as they are originally. However, if you have a non-zero OFFSET, you need to specify a non-zero start beat in order to sync the audio with the video. 
-            # 
-            # So the relation of the beat start of BGCHANGES (beats) to OFFSET (seconds) is complex because of the changes in units. This is predicated on BPMS. Take this example chart from BambooBladeOP:
-            # 
-            # #OFFSET:1.898;
-            # #BPMS:0.000=160.002;
-            # #BGCHANGES:5.000=BambooBladeOP.avi=1.000=1=0=0=StretchNoLoop==CrossFade==,
-            # 240.000=BambooBladeOP-bg.png=1.000=1=0=0=StretchNoLoop==CrossFade==,
-            # 99999.000=-nosongbg-=1.000=0=0=0=StretchNoLoop====
-            # 
-            # The #OFFSET is in seconds and #BGCHANGES=x=BambooBladeOP.avi, where x is referred to as "beat start" in beats.The exact number depends on the offset (#OFFSET), bpm of your song (#BPMS). 
-            # A more programmatic way to calculate it is the following: 
-            # 
-            # offset (s) * bpm/60 (b/s) = beat offset
-            # 
-            # So plugging in Juzo's numbers above, 1.898 * 160.002/60 = 5.0613966 Which equates how one would come up with BGCHANGES:5.000
-
             logger.debug(f"Offset: {self.offset}")
             logger.debug(f"BPMs: {self.bpms}")
             bpm = self.bpms[0][1]
@@ -201,46 +184,11 @@ class SMFile(StepChartFile):
             if self.bg_changes_stretchnoloop is False and "StretchNoLoop" not in self.bg_changes_effect:
                 raise OptionWarning("bg_changes", "BGChanges beat is present but BGChanges stretchnoloop is not set to true. Video will loop at end if unspecified")
             
-
         if self.unknown_options:
             raise OptionWarning("sm_file", f"Unknown options: {self.unknown_options}")
 
-        
+
     def _parse_bgchange(self, bgchange_line: str):
-        """
-        Parse a BGCHANGES line into its component parts with default values.
-        
-        BGCHANGE format:
-        beat=file_or_folder=update_rate=crossfade=stretchrewind=stretchnoloop=Effect=File2=Transition=Color1=Color2;
-
-        beat: The beat this BGCHANGE occurs on. Can be negative to start before the first beat.
-        file_or_folder: The relative path to the file to use for the BGCHANGE. Lua files are allowed. If a folder is given, it looks for "default.lua".
-        update_rate: The update rate of the BGCHANGE.
-        crossfade: set to 1 if using a crossfade. Overriden by Effect.
-        stretchrewind: set to 1 if using stretchrewind. Overriden by Effect.
-        stretchnoloop: set to 1 if using stretchnoloop. Overriden by Effect.
-        Effect: What BackgroundEffect to use.
-        File2: The second file to load for this BGCHANGE.
-        Transition: How the background transitions to this.
-        Color1/Color2: Formatted as red^green^blue^alpha, with the values being from 1 to 0, Passed to the BackgroundEffect with the LuaThreadVaraible "Color1"/"Color2" in web hexadecimal format as a string. Alpha is optional.
-        
-        Examples: 
-                Beat   =File                  =UpdateRate   =CrossFade =StretchRewind =StretchNoLoop   =Effect        =File2 =Transition =Color1 =Color2
-                -0.506 =sengoku3.mp4          =1.000        =1         =0             =0               =StretchNoLoop =      =CrossFade  =       =
-
-
-            This chart has two oddities:
-            1) specifies both CrossFade with a 1 with the explicit CrossFade argument as well as specifying a CrossFade transition.
-            2) specifies 0 for the explicit StretchNoLoop argument, but yet specifies a StretchNoLoop effect.
-
-            Would be more simply defined as the following:
-                Beat   =File                  =UpdateRate   =CrossFade =StretchRewind =StretchNoLoop   =Effect        =File2 =Transition =Color1 =Color2
-                -0.506 =sengoku3.mp4          =1.000        =1         =0             =1               =              =      =           =       =
-
-                Or, without whitespace:
-                -0.506=sengoku3.mp4=1.000=1=0=1=====
-                
-        """
         # Default values
         defaults = {
             'beat': 0,
@@ -294,6 +242,7 @@ class SMFile(StepChartFile):
         
         return result
     
+
     @classmethod
     def get_valid_options(cls):
         opts = [
@@ -309,6 +258,7 @@ class SMFile(StepChartFile):
             "BANNER",            
             "BACKGROUND",
             "CDTITLE",
+            "JACKET",
             "SAMPLESTART",
             "SAMPLELENGTH",
             "SELECTABLE",
@@ -320,7 +270,11 @@ class SMFile(StepChartFile):
             "LISTSORT",
             "BGCHANGES",
             "FGCHANGES",
+            "NOTEDATA",
+            "STEPSTYPE",
+            "DESCRIPTION",
+            "DIFFICULTY",
+            "METER",
             "NOTES",
         ]
-
         return opts
