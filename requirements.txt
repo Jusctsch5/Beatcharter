@@ -3,3 +3,4 @@ aubio
 numpy
 pydub
 librosa
+tomli; python_version < "3.11"

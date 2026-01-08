@@ -3,6 +3,7 @@ import logging
 from pathlib import Path
 from concreator.concreator import create_dynamic_assets
 from stepchart_utils.chart_parser import Chart, ChartParser
+from config_utils import load_config, get_config_value
 
 logging.basicConfig(format="%(filename)s:%(lineno)d - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -12,7 +13,7 @@ def process_sm_file(sm_file: Path, output_dir: Path) -> None:
     """Process a single SM file and create its dynamic assets"""
     try:
         sm_parser = ChartParser()
-        parsed_chart: Chart = sm_parser.parse_sm_file(sm_file)
+        parsed_chart: Chart = sm_parser.parse_file(sm_file)
 
         # Create output directory based on song directory name
         logger.info(f"Processing: {sm_file.relative_to(sm_file.parent.parent)}")
@@ -31,19 +32,38 @@ def find_sm_files(directory: Path) -> list[Path]:
 def main():
     parser = argparse.ArgumentParser(description="Create dynamic assets from SM files")
     parser.add_argument(
-        "path", type=str, help="Path to SM file or directory containing SM files"
+        "--config",
+        type=str,
+        default="beatcharter.toml",
+        help="Path to TOML config file (default: beatcharter.toml)",
+    )
+    parser.add_argument(
+        "path",
+        type=str,
+        nargs="?",
+        help="Path to SM file or directory containing SM files (overrides config)",
     )
     parser.add_argument(
         "--output",
         "-o",
         type=str,
-        default="output",
-        help="Output directory for dynamic assets (default: output)",
+        help="Output directory for dynamic assets (overrides config)",
     )
     args = parser.parse_args()
 
-    path = Path(args.path)
-    output_dir = Path(args.output)
+    # Load config
+    config = load_config(Path(args.config))
+    
+    # Get values from config or command line (CLI takes precedence)
+    path = Path(args.path) if args.path else Path(
+        get_config_value(config, "concreator", "path", None)
+    )
+    if path is None:
+        parser.error("path is required (either as argument or in config file)")
+    
+    output_dir = Path(args.output) if args.output else Path(
+        get_config_value(config, "concreator", "output", "output")
+    )
 
     if not path.exists():
         logger.error(f"Error: Path {path} does not exist")

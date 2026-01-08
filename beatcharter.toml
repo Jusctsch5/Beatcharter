@@ -1,0 +1,20 @@
+# Beatcharter Configuration File
+# This file contains default paths and settings for various scripts
+
+[course_creator]
+# Path to the Songs directory containing subsong directories
+songs_dir = "/home/john/Stepmania/Songs"
+# Path to the Courses directory where generated courses will be saved
+courses_dir = "/home/john/Stepmania/Courses"
+
+[concreator]
+# Default input path (can be overridden by command line argument)
+# path = "/home/john/Stepmania/Songs"
+# Default output directory for dynamic assets
+output = "output"
+
+[stepchart_parser]
+# Default input path (can be overridden by command line argument)
+# path = "/home/john/Stepmania/Songs"
+# Default output file (optional)
+# output = ""

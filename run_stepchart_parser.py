@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import List
 from stepchart_utils.chart_parser import Chart, ChartParser
 from stepchart_utils.common_parser import ParseError
+from config_utils import load_config, get_config_value
 
 logging.basicConfig(level=logging.INFO, format="%(filename)s:%(lineno)d - %(message)s")
 logger = logging.getLogger(__name__)
@@ -37,14 +38,33 @@ def find_sm_files(directory: Path) -> list[Path]:
 def main():
     parser = argparse.ArgumentParser(description="Parse Stepmania SM files")
     parser.add_argument(
-        "path", type=str, help="Path to SM file or directory containing SM files"
+        "--config",
+        type=str,
+        default="beatcharter.toml",
+        help="Path to TOML config file (default: beatcharter.toml)",
     )
     parser.add_argument(
-        "--output", "-o", type=str, help="Output file for parsed data (optional)"
+        "path",
+        type=str,
+        nargs="?",
+        help="Path to SM file or directory containing SM files (overrides config)",
+    )
+    parser.add_argument(
+        "--output", "-o", type=str, help="Output file for parsed data (overrides config)"
     )
     args = parser.parse_args()
 
-    path = Path(args.path)
+    # Load config
+    config = load_config(Path(args.config))
+    
+    # Get values from config or command line (CLI takes precedence)
+    path = Path(args.path) if args.path else Path(
+        get_config_value(config, "stepchart_parser", "path", None)
+    )
+    if path is None:
+        parser.error("path is required (either as argument or in config file)")
+    
+    output = args.output if args.output else get_config_value(config, "stepchart_parser", "output", None)
     if not path.exists():
         logger.error(f"Error: Path {path} does not exist")
         return
