@@ -32,9 +32,9 @@ def get_song_title_from_chart(chart_file: Path, chart_parser: ChartParser) -> st
 
 
 def get_songs_from_subsong_dir(subsong_dir: Path, chart_parser: ChartParser) -> List[str]:
-    """Get all song titles from a subsong directory"""
+    """Get all song entries from a subsong directory using folder names directly"""
     songs = []
-    seen_titles: Set[str] = set()
+    seen_entries: Set[str] = set()
     
     # Iterate through all subdirectories (song directories)
     for item in subsong_dir.iterdir():
@@ -42,13 +42,12 @@ def get_songs_from_subsong_dir(subsong_dir: Path, chart_parser: ChartParser) -> 
             # Look for chart files in this song directory
             chart_files = find_chart_files_in_directory(item, chart_parser)
             if chart_files:
-                # Use the first chart file found to get the title
-                # (typically there's one .sm or .ssc per song directory)
-                title = get_song_title_from_chart(chart_files[0], chart_parser)
+                # Use the directory name directly, not the title from the SM file
+                folder_name = item.name
                 # Avoid duplicates
-                if title not in seen_titles:
-                    songs.append(title)
-                    seen_titles.add(title)
+                if folder_name not in seen_entries:
+                    songs.append(folder_name)
+                    seen_entries.add(folder_name)
     
     return sorted(songs)  # Sort for consistent ordering
 
@@ -131,7 +130,7 @@ def generate_courses_for_directory(
 
         # Generate course file name: {subsong_dir_name}_All.crs
         # Course title keeps spaces, but filename replaces whitespace with underscores
-        course_name = f"{subsong_dir.name}_All"
+        course_name = f"{subsong_dir.name} All"
         course_filename = course_name.replace(" ", "_")
         course_file_path = generated_dir / f"{course_filename}.crs"
 
