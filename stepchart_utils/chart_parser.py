@@ -32,20 +32,20 @@ class ChartParser:
 
     def parse_file(self, filepath: Path) -> Chart:
         if filepath.suffix == ".sm":
-            return self._parse_sm_file(filepath)
+            return self.parse_sm_file(filepath)
         elif filepath.suffix == ".ssc":
-            return self._parse_ssc_file(filepath)
+            return self.parse_ssc_file(filepath)
         else:
             raise ValueError(f"Unsupported file type: {filepath.suffix}")
 
-    def _parse_sm_file(self, filepath: Path) -> Chart:
+    def parse_sm_file(self, filepath: Path) -> Chart:
         """Parse an SM file and return an SMFile object"""
         sm_file, audio_file, video_file = SMFile().parse(filepath)
         chart = Chart(sm_file, video_file, audio_file)
 
         return chart
 
-    def _parse_ssc_file(self, filepath: Path) -> Chart:
+    def parse_ssc_file(self, filepath: Path) -> Chart:
         """Parse an SSC file and return an SSCFile object"""
         ssc_file, audio_file, video_file = SSCFile().parse(filepath)
         chart = Chart(ssc_file, video_file, audio_file)

@@ -158,6 +158,12 @@ class SMFile(StepChartFile):
         if self.banner and not (chart_dir / self.banner).exists():
             raise FileMissing(f"Banner file {self.banner} does not exist")
 
+        if not self.title:
+            raise FileUnspecified("title")
+
+        if not self.subtitle:
+            raise FileUnspecified("subtitle")
+
         if not self.background:
             raise FileUnspecified("background")
         if self.background and not (chart_dir / self.background).exists():

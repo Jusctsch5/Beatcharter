@@ -21,7 +21,7 @@ class Options:
 
 
 def create_dynamic_banner(options: Options, chart: Chart, output_dir: Path) -> Path:
-    sm_file = chart.sm_file
+    sm_file = chart.chart_file
     chart_dir = sm_file.filepath.parent
 
     # Look for a *.png or *.jpg in the chart directory
@@ -194,7 +194,7 @@ def create_dynamic_banner(options: Options, chart: Chart, output_dir: Path) -> P
 
 
 def create_dynamic_jacket(options: Options, chart: Chart, output_dir: Path) -> Path:
-    sm_file = chart.sm_file
+    sm_file = chart.chart_file
     chart_dir = sm_file.filepath.parent
 
     # Look for a *.png or *.jpg in the chart directory
